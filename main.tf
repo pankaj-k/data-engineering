@@ -12,15 +12,9 @@ terraform {
   }
 }
 
-module "data_engg_app_s3_module" {
-  source = "./data_engg_application/s3_module"
+module "data_engg_app" {
+  source = "./data_engg_application"
 }
-
-module "data_engg_app_lambda_module" {
-  source = "./data_engg_application/lambda_module"
-}
-
-
 #   # Common variables
 #   # environment = var.environment
 #   region  = var.region
