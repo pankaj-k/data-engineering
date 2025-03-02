@@ -4,7 +4,9 @@ data "aws_iam_policy_document" "s3_iam_access_policy_document" {
     sid = "1"
     actions = [
       "s3:ListBucket",
-      "resourcegroupstaggingapi:GetResources", # Filter S3 buckets based on tags.
+      # "resourcegroupstaggingapi:GetResources", # Filter S3 buckets based on tags.
+      #"tag:GetResources",
+      #"s3:GetBucketTagging", # Get tags of the bucket.
       "s3:AbortMultipartUpload",
       "s3:GetBucketLocation",
       "s3:GetObject",
@@ -24,6 +26,9 @@ data "aws_iam_policy_document" "s3_iam_access_policy_document" {
       "s3:GetBucketLocation",
       "s3:ListBucket",
       "s3:ListBucketMultipartUploads",
+      # "resourcegroupstaggingapi:GetResources", # Filter S3 buckets based on tags.
+      #"tag:GetResources",
+      #"s3:GetBucketTagging", # Get tags of the bucket.
     ]
     resources = ["arn:aws:s3:::dataeng-*/*"] # Actions allowed on objects in the bucket.
   }

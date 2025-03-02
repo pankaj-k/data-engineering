@@ -32,14 +32,15 @@ def lambda_handler(event, context):
     # list_of_buckets = s3_client.list_buckets()
 
     # Find the bucket that starts with the base name and has the random suffix
-    output_bucket = get_buckets_by_tag('Name', 'clean-zone')
+    # Return is a list but we will only use the first element. There will be only one bucket with the given tag.
+    output_bucket = (get_buckets_by_tag('Name', 'clean-zone'))[0]
 
     if not output_bucket:
         print("No matching bucket found")
         return
     else:
         print(f"Found matching bucket: {output_bucket}")
-        output_path = f"s3://dataeng-clean-zone-INITIALS/{db_name}/{table_name}"
+        output_path = f"s3://{output_bucket}/{db_name}/{table_name}"
         print(f"Output_Path: {output_path}")
 
     input_df = wr.s3.read_csv([input_path])
